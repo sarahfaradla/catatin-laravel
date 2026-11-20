@@ -11,6 +11,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CatatanController;
 
 // ========================================
 // AUTHENTICATION (GUEST)
@@ -49,7 +50,6 @@ Route::resource('tugas', TugasController::class)
 Route::get('/dashboard', [UserDashboardController::class, 'index'])
     ->name('user.dashboard');
     
-
     Route::get('/profil', function () {
         return view('user.profile');
     })->name('user.profile');
@@ -65,6 +65,13 @@ Route::get('/dashboard', [UserDashboardController::class, 'index'])
     
 
     Route::put('/koleksi/{playlist}', [PlaylistController::class, 'update'])->name('user.playlists.update');
+
+    Route::get('/catatan-saya',           [CatatanController::class, 'index'])->name('catatan.index');
+    Route::get('/unggah-catatan',         [CatatanController::class, 'create'])->name('catatan.create');
+    Route::post('/unggah-catatan',        [CatatanController::class, 'store'])->name('catatan.store');
+    Route::get('/catatan/{catatan}/edit', [CatatanController::class, 'edit'])->name('catatan.edit');
+    Route::put('/catatan/{catatan}',      [CatatanController::class, 'update'])->name('catatan.update');
+    Route::delete('/catatan/{catatan}',   [CatatanController::class, 'destroy'])->name('catatan.destroy');
 });
 
 

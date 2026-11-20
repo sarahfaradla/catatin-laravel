@@ -12,8 +12,13 @@ class Category extends Model
         'name',
     ];
 
-     public function courses(): BelongsToMany
+    public function courses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class, 'category_course');
+    }
+
+    public function catatans()
+    {
+        return $this->hasMany(Catatan::class);
     }
 }
