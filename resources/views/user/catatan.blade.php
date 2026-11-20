@@ -48,3 +48,4 @@
 
 <script src="{{ asset('js/catatan_saya.js') }}"></script>
 @endsection
+

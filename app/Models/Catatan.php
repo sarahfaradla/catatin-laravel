@@ -38,3 +38,5 @@ class Catatan extends Model
         return $this->belongsTo(Category::class);
     }
 }
+
+

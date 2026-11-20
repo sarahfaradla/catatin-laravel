@@ -137,3 +137,6 @@ Route::prefix('admin')
 Route::post('/logout', [LoginController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+
+    

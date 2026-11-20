@@ -27,7 +27,7 @@ class CatatanController extends Controller
 
     public function index()
     {
-        $catatanSaya = auth()->user()->catatans()->with('category')->latest()->get();
+        $catatanSaya = Auth::user()->catatans()->with('category')->latest()->get();
         return view('user.catatan', compact('catatanSaya'));
     }
 
@@ -63,22 +63,24 @@ class CatatanController extends Controller
 
     public function update(Request $request, Catatan $catatan)
     {
-        abort_if($catatan->user_id !== $this->userId(), 404);
+        abort_if($catatan->user_id !== Auth::id(), 404);
 
         $data = $request->validate($this->aturan());
         $data['anonim'] = $request->boolean('anonim') && $data['visibilitas'] === 'publik';
 
         $catatan->update($data);
 
-        return redirect()->route('catatan.index')->with('sukses', 'Catatan berhasil diperbarui.');
+        return redirect()->route('user.catatan')->with('sukses', 'Catatan berhasil diperbarui.');
     }
 
     public function destroy(Catatan $catatan)
     {
-        abort_if($catatan->user_id !== $this->userId(), 404);
+        abort_if($catatan->user_id !== Auth::id(), 404);
 
         $catatan->delete();
 
         return redirect()->route('catatan.index')->with('sukses', 'Catatan berhasil dihapus.');
     }
 }
+
+
